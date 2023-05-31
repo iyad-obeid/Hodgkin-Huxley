@@ -1,3 +1,7 @@
+####################################
+# Iyad Obeid / iyad.obeid@temple.edu
+####################################
+
 import numpy as np
 import matplotlib.pyplot as plt
 from neuron_models import hh_neuron

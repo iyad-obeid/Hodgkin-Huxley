@@ -1,3 +1,7 @@
+####################################
+# Iyad Obeid / iyad.obeid@temple.edu
+####################################
+
 import numpy as np
 
 class hh_neuron:
@@ -45,3 +49,34 @@ class hh_neuron:
         self.n += dn * self.dt
 
         return self.v
+
+class fn_neuron:
+
+    def __init__(self , a=0.3 , b=1.0 , tau=12.5 , I=0.20 , dt=0.001):
+        self.v , self.w = 0,0
+        self.a , self.b = a,b
+        self.tau = tau
+        self.I   = I
+        self.dt  = dt
+
+    def update(self):
+        v,w = self.v , self.w
+        a,b = self.a , self.b
+        tau = self.tau
+        I = self.I
+        dt = self.dt
+
+        dv = v - (v**3)/3 - w + I
+        dw = (v + a -b*w)/tau
+
+        self.v += dv*dt
+        self.w += dw*dt
+
+        return self.v , self.w
+
+def fn_ode(t,y,a,b,tau,I):
+    v,w = y   
+    dv  = v - (v**3)/3 - w + I
+    dw  = (v + a - b*w)/tau
+
+    return np.array( [dv,dw] )
